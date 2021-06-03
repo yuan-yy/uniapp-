@@ -40,8 +40,8 @@
 			</el-pagination>
 		</div>
 
-	
-		<el-dialog title="收货地址" :visible.sync="dialogFormVisible" class="haha" v-if="flag1">
+
+		<el-dialog title="收货地址" :visible.sync="dialogFormVisible" class="haha">
 			<el-form :model="form">
 				<el-form-item label="商品名称:" :label-width="formLabelWidth">
 					<el-input v-model="form.name" autocomplete="off"></el-input>
@@ -159,14 +159,7 @@
 				
 				<el-form-item label="自定义SKU2:" :label-width="formLabelWidth">
 					<div>
-						<div class="container222" style="width: 800px;">
-							<sku v-model="value" action="http://localhost:8081/index.php" :sku-tree="skuTree" :on-fetch-group="fetchSkuTree"
-								:on-fetch-sku="fetchSku" :on-create-group="createGroup" :on-create-sku="createSku" @on-change="change">
-							</sku>
-							<sku-table :data="value" :flatten="flatten" @on-change-data="handleChangeData"></sku-table>
-							<br>
-							<div @click="saveMessage">保存一下</div>
-						</div>
+						
 							
 					</div>
 						
@@ -182,7 +175,7 @@
 			</div>
 
 		</el-dialog>
-
+		
 	</div>
 
 </template>
@@ -191,36 +184,13 @@
 
 <script>
 	import jinEdit from "../jin-edit/jin-edit.vue"
-	import 'element-vue-sku/lib/sku.css'
-	import {
-		Sku,
-		SkuTable
-	} from 'element-vue-sku'
-	import {
-		flatten
-	} from 'element-vue-sku'
-	import {
-		isEqual
-	} from 'element-vue-sku'
 	export default {
 		components:{
-			Sku,
-			SkuTable,
-			flatten,
-			isEqual
+			// jinEdit
 		},
+	
 		data() {
 			return {
-				flag1:false,
-				sku: [
-				],
-				value: [
-				],
-				skuTree: [
-				],
-				data: [],
-				flatten: [
-				],
 				
 				good_id:"",//当前货物的id
 				type_id: "",
@@ -287,24 +257,11 @@
 					parent_id: '',
 					pparent_id: ''
 				},
-				formLabelWidth: '130px',
-				
+				formLabelWidth: '130px'
 			};
 		},
 		onLoad() {
 			let that = this
-			let a = localStorage.getItem('mesage')
-			let mesage = JSON.parse(localStorage.getItem('mesage'))
-			console.log(mesage,'neic')
-			// that.sku = mesage.sku
-			// this.$set(that.sku)
-			// that.flatten =  mesage.data 
-			// that.data = mesage.data
-			// this.$set(that.data)
-			// this.$forceUpdate()
-			// that.value = mesage.value
-			// that.skuTree =  mesage.skuTree
-			// this.$forceUpdate()
 			
 	
 			uni.request({
@@ -351,63 +308,6 @@
 		},
 
 		methods: {
-			
-			saveMessage(){
-				let that = this
-				localStorage.setItem("mesage",
-					JSON.stringify({
-					sku: that.sku, 
-					flatten: that.data, 
-					data: that.data,
-					skuTree: that.skuTree,
-					value: that.value
-					})
-				)
-			},
-			
-			fetchSkuTree() {
-				let that = this
-				return new Promise(resolve => {
-					resolve(that.skuTree)
-				})
-			},
-			
-			fetchSku(id) {
-				let that = this
-				return new Promise(resolve => {
-					resolve(that.sku)
-				})
-			},
-			
-			createGroup(text) {
-				return new Promise((resolve, reject) => {
-					if (text) {
-						resolve(parseInt(Math.random() * 100, 10) + 1)
-					} else {
-						reject(new Error())
-					}
-				})
-			},
-			
-			createSku(data) {
-				return new Promise((resolve, reject) => {
-					console.log(data)
-					resolve(data.data.map(item => {
-						return {
-							id: parseInt(Math.random() * 100, 10) + parseInt(Math.random() * 100, 10),
-							text: item
-						}
-					}))
-				})
-			},
-			
-			change(data) {},
-			
-			handleChangeData(data) {
-				console.log(123)
-				this.data = data
-			}	
-			,
 			addProduct(){
 				let that = this
 				that.good_id = ""
@@ -438,51 +338,11 @@
 						good_id: row.good_id
 					},
 					success: function(res) {
-						let msg = res.data.data
-						// that.saveMessage()
-						let mesage =  JSON.parse(JSON.parse(msg.info[0].colour))
-							console.log(mesage,'取出来的')
-							that.sku = mesage.sku
-							console.log(that.sku,"这里是Sku")
-							that.$set(that.sku)
-							that.flatten =  mesage.data 
-							that.data = mesage.data
-							that.$set(that.data)
-							that.$forceUpdate()
-							that.value = mesage.value
-							that.skuTree =  mesage.skuTree
-							that.$forceUpdate()
-						console.log(that.data)
-						
-						that.flag1 = false
-						setTimeout(function() {
-							that.flag1 = true
-						}, 100);
-						
-						// that.saveMessage()
-						// localStorage.setItem("mesage",
-						// 	JSON.stringify({
-						// 		sku: mesage.sku, 
-						// 		flatten: mesage.data, 
-						// 		data: mesage.data,
-						// 		skuTree: mesage.skuTree,
-						// 		value: mesage.value
-						// 	})
-						// )
-							// console.log(mesage,"mesage")
-						
-							
-					
-						
-						
-						
-						
-						
 						that.value3 = [],
 						that.pidValue = []
 						
 						console.log(res)
-						
+						let msg = res.data.data
 						
 						console.log(JSON.parse(msg.info[0].imgs))
 						console.log(JSON.parse(msg.info[0].edition))
@@ -498,19 +358,18 @@
 
 						that.html = JSON.parse(msg.info[0].info) 
 						
-						
-						
 						let dd = that.list2.filter(res=>{
 							return res.good_type_id == that.type_parent_id
 						})
 						let dd2 = that.list2.filter(res=>{
 							return res.good_type_id == that.type_id
 						})
-	
+						console.log(dd2)
 						that.pidValue[0] = dd[0].type_name
 						
 						
-						
+						console.log(that.value3)
+						console.log(that.value3)
 						that.value3[0] = dd2[0].type_name
 						that.$set(that.pidValue)
 						
@@ -527,7 +386,6 @@
 			
 			uploadSomething(){
 				let that = this
-				
 				if(this.good_id != ""){
 					uni.request({
 						url:"http://api_devs.wanxikeji.cn/api/admin/addModifyGood",
@@ -540,8 +398,8 @@
 							img: that.imageUrl2[0],
 							imgs: JSON.stringify(that.imageUrlList),
 							info: that.html,
-							edition: JSON.stringify(that.dynamicValidateForm.domains),
-							colour: JSON.stringify({sku: that.sku, flatten: that.data, data: that.data,skuTree: that.skuTree,value: that.value}),
+							colour: "",
+							edition: JSON.stringify(that.dynamicValidateForm.domains) ,
 							good_id: that.good_id
 							
 						},
@@ -562,8 +420,8 @@
 							img: that.imageUrl2[0],
 							imgs: JSON.stringify(that.imageUrlList),
 							info: that.html,
-							colour: JSON.stringify({sku: that.sku, flatten: that.data, data: that.data,skuTree: that.skuTree,value: that.value}),
-							edition: JSON.stringify(that.dynamicValidateForm.domains),
+							colour: "",
+							edition: JSON.stringify(that.dynamicValidateForm.domains) ,
 						},
 						success:function(res){
 							console.log(res)

@@ -35,145 +35,13 @@
 		data() {
 			return {
 				sku: [
-					// {
-					// 	id: 3,
-					// 	text: '蓝色'
-					// },
-					// {
-					// 	id: 10,
-					// 	text: '红色'
-					// },
-					// {
-					// 	id: 30,
-					// 	text: '土豪金'
-					// },
-					// {
-					// 	id: 137,
-					// 	text: '黑色'
-					// },
-					// {
-					// 	id: 138,
-					// 	text: '灰色'
-					// },
-					// {
-					// 	id: 121,
-					// 	text: 'xxl'
-					// },
-					// {
-					// 	id: 94,
-					// 	text: 'xxxl'
-					// }
 				],
 				value: [
-					// {
-					// 	'id': 10740,
-					// 	'text': '颜色',
-					// 	'leaf': [{
-					// 			'id': 3,
-					// 			'text': '蓝色',
-					// 			'is_show': false
-					// 		},
-					// 		{
-					// 			'id': 10,
-					// 			'text': '红色',
-					// 			'is_show': false
-					// 		}
-					// 	]
-					// },
-					// {
-					// 	'id': 40732,
-					// 	'text': '尺寸',
-					// 	'leaf': [{
-					// 			'id': 121,
-					// 			'text': 'xxl',
-					// 			'is_show': false
-					// 		},
-					// 		{
-					// 			'id': 94,
-					// 			'text': 'xxxl',
-					// 			'is_show': false
-					// 		}
-					// 	]
-					// }
 				],
 				skuTree: [
-					// {
-					// 	id: 10740,
-					// 	text: '颜色'
-					// },
-					// {
-					// 	id: 40732,
-					// 	text: '尺寸'
-					// }
 				],
 				data: [],
 				flatten: [
-					// {
-				// 		'skus': [{
-				// 				'k_id': 10740,
-				// 				'k': '颜色',
-				// 				'v_id': 3,
-				// 				'v': '蓝色'
-				// 			},
-				// 			{
-				// 				'k_id': 40732,
-				// 				'k': '尺寸',
-				// 				'v_id': 121,
-				// 				'v': 'xxl'
-				// 			}
-				// 		],
-				// 		'price': 222222,
-				// 		'stock': 12222,
-				// 		'marked_price': 12312
-				// 	},
-				// 	{
-				// 		'skus': [{
-				// 				'k_id': 10740,
-				// 				'k': '颜色',
-				// 				'v_id': 3,
-				// 				'v': '蓝色'
-				// 			},
-				// 			{
-				// 				'k_id': 40732,
-				// 				'k': '尺寸',
-				// 				'v_id': 94,
-				// 				'v': 'xxxl'
-				// 			}
-				// 		],
-				// 		'price': 233333,
-				// 		'stock': 222222,
-				// 		'marked_price': 111111
-				// 	},
-				// 	{
-				// 		'skus': [{
-				// 				'k_id': 10740,
-				// 				'k': '颜色',
-				// 				'v_id': 10,
-				// 				'v': '红色'
-				// 			},
-				// 			{
-				// 				'k_id': 40732,
-				// 				'k': '尺寸',
-				// 				'v_id': 121,
-				// 				'v': 'xxl'
-				// 			}
-				// 		]
-				// 	},
-				// 	{
-				// 		'skus': [{
-				// 				'k_id': 10740,
-				// 				'k': '颜色',
-				// 				'v_id': 10,
-				// 				'v': '红色'
-				// 			},
-				// 			{
-				// 				'k_id': 40732,
-				// 				'k': '尺寸',
-				// 				'v_id': 94,
-				// 				'v': 'xxxl'
-				// 			}
-				// 		]
-				// 	}
 				]
 			}
 		},
@@ -181,13 +49,10 @@
 				let that = this
 				let a = localStorage.getItem('mesage')
 				let mesage = JSON.parse(localStorage.getItem('mesage'))
-				console.log(mesage)
 				that.sku = mesage.sku
-				console.log(mesage.sku)
 				this.$set(that.sku)
 				that.flatten =  mesage.data 
 				that.data = mesage.data
-				console.log(mesage.data)
 				this.$set(that.data)
 				this.$forceUpdate()
 				that.value = mesage.value
@@ -251,6 +116,9 @@
 				console.log(123)
 				this.data = data
 			}
+		
+		
+		
 		}
 	}
 </script>
