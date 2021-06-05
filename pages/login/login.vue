@@ -438,21 +438,24 @@
 						good_id: row.good_id
 					},
 					success: function(res) {
+						console.log(res)
 						let msg = res.data.data
 						// that.saveMessage()
-						let mesage =  JSON.parse(JSON.parse(msg.info[0].colour))
+					
+						// console.log(JSON.parse(JSON.parse(msg.info[0].colour)))
+						let mesage = JSON.parse(JSON.parse(msg.info[0].colour))
 							console.log(mesage,'取出来的')
 							that.sku = mesage.sku
 							console.log(that.sku,"这里是Sku")
-							that.$set(that.sku)
+							// that.$set(that.sku)
 							that.flatten =  mesage.data 
 							that.data = mesage.data
-							that.$set(that.data)
+							// that.$set(that.data)
 							that.$forceUpdate()
 							that.value = mesage.value
 							that.skuTree =  mesage.skuTree
 							that.$forceUpdate()
-						console.log(that.data)
+							// console.log(that.data,that.sku,that.skuTree)
 						
 						that.flag1 = false
 						setTimeout(function() {
@@ -529,6 +532,12 @@
 				let that = this
 				
 				if(this.good_id != ""){
+					
+					that.sku = ""
+					
+					
+						
+					
 					uni.request({
 						url:"http://api_devs.wanxikeji.cn/api/admin/addModifyGood",
 						data:{
